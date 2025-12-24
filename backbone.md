@@ -1,3 +1,4 @@
+```mermaid
 flowchart LR
   A[Document\n(PDF/DOCX/PPT)] --> B[Parse / Extract\n(text, images, tables)]
   B --> C[Chunk / Normalize\n(text chunks + asset records)]
