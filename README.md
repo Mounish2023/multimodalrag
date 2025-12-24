@@ -40,3 +40,16 @@ This serves as a hybrid, precision-focused approach that leverages the reasoning
     4.  **Retrieval**: The search space for images is strictly filtered to the pages cited in the answer.
     5.  **Selection**: Final image selection is performed using cosine similarity within that filtered subset.
 *   **Notebook**: `method5_cohere_text_embeddings_citation_filtered_images.ipynb`
+
+### Method 6: Layout-Aware Document Intelligence (LandingAI ADE)
+Standard open-source parsers (e.g., PyMuPDF, pdfplumber) often fail to capture complex document structures, missing the hierarchical relationships between sections, paragraphs, list items, and the precise bounding boxes for images and tables. This loss of layout signal filters out critical context needed for accurate answers.
+
+*   **Problem**: Loss of structural context (headers, lists) and imprecise extraction of visuals (tables, images) when using basic text parsers.
+*   **Solution**: Usage of advanced layout analysis models (Azure Document Intelligence, Amazon Textract, LandingAI ADE, etc.) to capture bounding boxes, confidence scores, and content hierarchy.
+*   **Process**:
+    1.  **Layout Analysis**: Detects regions for text, tables, and images with bounding boxes.
+    2.  **Hierarchical Chunking**: Chunks text based on document structure (sections, paragraphs).
+    3.  **Extraction & Summarization**: Extracts images and tables using bounding boxes; generates summaries for them.
+    4.  **Indexing**: Text chunks and visual summaries are converted to embeddings and indexed (preserving metadata like `image_urls` and `raw_html_tables`).
+    5.  **Retrieval**: Answer generated using text/tables with citations; search space for images filtered by citation pages.
+*   **Notebook**: `landingai_ade_bronze_silver_gold_multimodal_chunker_faiss.ipynb`

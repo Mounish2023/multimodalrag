@@ -10,3 +10,5 @@ matplotlib
 azure-search-documents
 openai
 cohere
+landingai-ade
+google-cloud-storage
