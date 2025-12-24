@@ -1,0 +1,12 @@
+pymupdf
+pillow
+transformers
+torch
+torchvision
+faiss-cpu
+numpy
+tqdm
+matplotlib
+azure-search-documents
+openai
+cohere
