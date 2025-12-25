@@ -2,6 +2,33 @@
 
 This repository explores and demonstrates different strategies for retrieving both text and images in a Multimodal Retrieval-Augmented Generation (RAG) system. Below are the five methods implemented, ranging from caption-based indexing to advanced citation-filtered retrieval.
 
+## Why Multimodal RAG?
+Standard Text-RAG pipelines often fail to capture the full context of complex documents. Critical information is frequently embedded in:
+*   **Visuals**: Charts, graphs, and diagrams that contain data not present in the text.
+*   **Layouts**: The structural relationship between sections, headers, and lists.
+*   **Tables**: Complex data structures where row/column relationships are essential.
+
+By ignoring these visual signals, text-only systems lose significant information. Multimodal RAG addresses this by treating images and layout as first-class citizens, ensuring that the *entire* document context is retrieved and understood.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  A[Document<br>(PDF/DOCX/PPT)] --> B[Parse / Extract\n(text, images, tables)]
+  B --> C[Chunk / Normalize\n(text chunks + asset records)]
+  C --> D[Summarize assets (optional)\n(images/tables)]
+  C --> E[Embed text chunks]
+  D --> F[Embed summaries]
+  E --> G[(Vector Index\nFAISS)]
+  F --> G
+  G --> H[Retrieve Top-K]
+  H --> I[LLM Answer + citations]
+  I --> J{Post-filter assets?}
+  J -->|yes| K[Filter by cited pages/window]
+  K --> L[Final response\n(text+tables+images+cites)]
+  J -->|no| L
+```
+
 ## Approaches
 
 ### Method 1 & 2: Text-Based Indexing of Images
