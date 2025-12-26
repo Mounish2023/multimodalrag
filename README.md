@@ -30,6 +30,10 @@ flowchart LR
 
 ```
 
+### High-Level Design (Draft)
+![High Level Design Draft](logos_designs/MMRAG_ARCHITECTURE.svg)
+
+
 ## Approaches
 
 ### Method 1 & 2: Text-Based Indexing of Images
